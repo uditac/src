@@ -1,0 +1,56 @@
+﻿<Window x:Class="Wpf.App.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.App.UI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid >
+        <TextBox x:Name="txtFile" Margin="0,10,200,374"></TextBox>
+        <Button x:Name="btnBrowse" Content="Browse"  Margin="605,10,95,374" Click="btnBrowse_Click"></Button>
+        <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click" Margin="711,10,2,374"></Button>
+        <DataGrid Name="dgBooks" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,80,0,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" Width="215"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding Path=Author}"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Path=Year}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="{Binding Color}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="In Stock">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Name="chkInstock" IsChecked="{Binding Path=InStock,Mode=TwoWay}" Margin="45 2 0 0" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Binding">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Name="cmbBinding" SelectedValue="{Binding Binding}" SelectedValuePath="Name">
+                                <ComboBoxItem Name="Paperback">Paperback</ComboBoxItem>
+                                <ComboBoxItem Name="Coalwood">Coalwood</ComboBoxItem>
+                                <ComboBoxItem Name="Hardcover">Hardcover</ComboBoxItem>
+                                <ComboBoxItem Name="Unknown">Unknown</ComboBoxItem>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Description">
+                    
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDesc" Content="Description" ToolTip="{Binding Path=Description}"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
